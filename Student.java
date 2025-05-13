@@ -1,13 +1,17 @@
+import java.util.*;
 public class Student {
     private String name;
+    private boolean isAbsent;
     private int id;
     private int timesLate;
     private int timesAbsent;
     private int timesTooLongOutClass;
+    private Date timeLeftClass;
 
     public Student(String name, int id) {
         this.name = name;
         this.id = id;
+        isAbsent = false;
         timesLate = 0;
         timesAbsent = 0;
         timesTooLongOutClass = 0;
@@ -26,4 +30,34 @@ public class Student {
     public void resetTimesLate() { timesLate = 0; }
     public void resetTimesAbsent() { timesAbsent = 0; }
     public void resetTimesTooLongOutClass() { timesTooLongOutClass = 0; }
+
+    public void absent() { 
+        isAbsent = true; 
+        this.incrementTimesAbsent();
+    }
+
+    public void leaveClass() {
+        timeLeftClass = new Date();
+        this.incrementTimesTooLongOutClass();
+    }
+
+    public void returnToClass() {
+        Date currentTime = new Date();
+        long timeDifference = currentTime.getTime() - timeLeftClass.getTime();
+        long timeDifferenceInMinutes = timeDifference / (1000 * 60);
+        if (timeDifferenceInMinutes > 5) {
+            this.incrementTimesTooLongOutClass();
+        }
+        timeLeftClass = null;
+    }
+
+    public String toString() {
+        return "\nStudent{" +
+                "\nName: " + name +
+                "\nID: " + id +
+                "\nTimes Late: " + timesLate +
+                "\nTimes Absent: " + timesAbsent +
+                "\nTimes Too Long Outside Class: " + timesTooLongOutClass +
+                "\n}";
+    }
 }
