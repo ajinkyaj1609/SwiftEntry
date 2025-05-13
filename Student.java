@@ -36,6 +36,12 @@ public class Student {
         this.incrementTimesAbsent();
     }
 
+    public void tardy() { 
+        isAbsent = false; 
+        this.incrementTimesLate();
+    }
+
+
     public void leaveClass() {
         timeLeftClass = new Date();
         this.incrementTimesTooLongOutClass();
