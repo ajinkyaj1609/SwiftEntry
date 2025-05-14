@@ -8,8 +8,8 @@ public class Students{
         students = x;
     }
 
-    public void addStudent(String name, int id){
-        Student x = new Student(name, id);
+    public void addStudent(int id){
+        Student x = new Student(id);
         students.add(x);
     }
 
