@@ -16,6 +16,13 @@
             "name": "Main",
             "request": "launch",
             "mainClass": "Main",
+            "projectName": "SwiftEntry_48b9538b"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
             "projectName": "SwiftEntry_89d89da1"
         },
         {

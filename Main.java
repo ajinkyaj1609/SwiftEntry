@@ -1,14 +1,29 @@
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
 
 public class Main
 {
         public static void main(String[] args) {
 
-                Student test = new Student("John Doe", 12345);
-                System.out.println(test.toString());
+                String data="data.txt";
+                File file = new File(data);
+                //read from data.txt
+                try{
+                        List<String> lines = Files.readAllLines(file.toPath());
+                        lines.forEach(System.out::println);
+                }
+                catch (IOException e){
+                        System.out.println("Error reading file: " + e.getMessage());
+                }
+                //write to data.txt
+                try{
+                        String content = "Hello, World!";
+                        Files.write(file.toPath(), content.getBytes());
+                }
+                catch (IOException e){
+                        System.out.println("Error writing to file: " + e.getMessage());
+                }
         }
-
-      
-
 }
