@@ -1,5 +1,5 @@
 public class Teacher{
-    private String password;
+    private static String password;
 
     public Teacher(){
         password = "000000";
