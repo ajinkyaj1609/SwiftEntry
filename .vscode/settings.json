@@ -4,6 +4,7 @@
         "javax.mail.jar",
         "Email stuff/javax.mail.jar",
         "activation-1.1.jar",
-        "Email stuff/activation-1.1.jar"
+        "Email stuff/activation-1.1.jar",
+        "Email stuff/smtp-1.4.5.jar"
     ]
 }
