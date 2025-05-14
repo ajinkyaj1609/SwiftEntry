@@ -8,8 +8,8 @@ public class Teacher{
     public Teacher(String p){
         password = p;
     }
-    
-    public static String getPassword(){
+
+    public String getPassword(){
         return password;
     }
 
