@@ -6,5 +6,6 @@
         "activation-1.1.jar",
         "Email stuff/activation-1.1.jar",
         "Email stuff/smtp-1.4.5.jar"
-    ]
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
 }
