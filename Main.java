@@ -9,12 +9,21 @@ public class Main
 
                 String data="data.txt";
                 File file = new File(data);
+                //read from data.txt
                 try{
                         List<String> lines = Files.readAllLines(file.toPath());
                         lines.forEach(System.out::println);
                 }
                 catch (IOException e){
                         System.out.println("Error reading file: " + e.getMessage());
+                }
+                //write to data.txt
+                try{
+                        String content = "Hello, World!";
+                        Files.write(file.toPath(), content.getBytes());
+                }
+                catch (IOException e){
+                        System.out.println("Error writing to file: " + e.getMessage());
                 }
         }
 }
