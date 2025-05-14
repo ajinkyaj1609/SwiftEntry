@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "emailproject"
+        },
+        {
+            "type": "java",
             "name": "SendEmail",
             "request": "launch",
             "mainClass": "SendEmail",
