@@ -10,6 +10,7 @@ public class Student {
     private int timesTooLongOutClass;
     private Date timeLeftClass;
     private String email;
+    private boolean isFlagged;
 
 
     public Student(String name, int id) {
@@ -20,6 +21,7 @@ public class Student {
         timesAbsent = 0;
         timesTooLongOutClass = 0;
         isAbsent = true;
+        isFlagged = false;
     }
 
     public Student(int id) {
@@ -29,6 +31,7 @@ public class Student {
         timesAbsent = 0;
         timesTooLongOutClass = 0;
         isAbsent = true;
+        isFlagged = false;
     }
 
     public String getName() { return name; }
@@ -36,6 +39,7 @@ public class Student {
     public int getTimesLate() { return timesLate; }
     public int getTimesAbsent() { return timesAbsent; }
     public int getTimesTooLongOutClass() { return timesTooLongOutClass; }
+    public boolean getIsFlagged() { return isFlagged; }
     public void setName(String name) { this.name = name; }
     public void setId(int id) { this.id = id; }
     public void incrementTimesLate() { timesLate++; }
@@ -76,6 +80,15 @@ public class Student {
         
     }
 
+    public Boolean isFlagged(){
+        if(timesLate > 5 || timesAbsent > 10 || timesTooLongOutClass > 5){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
     public String toString() {
         return "\nStudent{" +
                 "\nName: " + name +
