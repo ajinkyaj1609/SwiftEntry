@@ -41,6 +41,13 @@ public class Main
                 catch (IOException e){
                         System.out.println("Error writing to file: " + e.getMessage());
                 }
-
+                //read the data from the file
+                try{
+                        List<String> lines = Files.readAllLines(file.toPath());
+                        lines.forEach(System.out::println);
+                }
+                catch (IOException e){
+                        System.out.println("Error reading file: " + e.getMessage());
+                }
         }
 }
