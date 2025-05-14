@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,5 +27,6 @@ public class Main
                 catch (IOException e){
                         System.out.println("Error writing to file: " + e.getMessage());
                 }
+                ArrayList<String> testingStudent = new ArrayList<>();
         }
 }
