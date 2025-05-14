@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "SendEmail",
+            "request": "launch",
+            "mainClass": "SendEmail",
+            "projectName": "SwiftEntry_89d89da1"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "Main",

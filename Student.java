@@ -1,4 +1,6 @@
 import java.util.*;
+import javax.mail.*;
+
 public class Student {
     private String name;
     private boolean isAbsent;
@@ -7,6 +9,8 @@ public class Student {
     private int timesAbsent;
     private int timesTooLongOutClass;
     private Date timeLeftClass;
+    private String email;
+
 
     public Student(String name, int id) {
         this.name = name;
@@ -15,6 +19,16 @@ public class Student {
         timesLate = 0;
         timesAbsent = 0;
         timesTooLongOutClass = 0;
+        isAbsent = true;
+    }
+
+    public Student(int id) {
+        this.id = id;
+        isAbsent = false;
+        timesLate = 0;
+        timesAbsent = 0;
+        timesTooLongOutClass = 0;
+        isAbsent = true;
     }
 
     public String getName() { return name; }
@@ -30,6 +44,7 @@ public class Student {
     public void resetTimesLate() { timesLate = 0; }
     public void resetTimesAbsent() { timesAbsent = 0; }
     public void resetTimesTooLongOutClass() { timesTooLongOutClass = 0; }
+    public void present() { isAbsent = false; }
 
     public void absent() { 
         isAbsent = true; 
@@ -55,6 +70,10 @@ public class Student {
             this.incrementTimesTooLongOutClass();
         }
         timeLeftClass = null;
+    }
+
+    public void emailPlan() {
+        
     }
 
     public String toString() {
