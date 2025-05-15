@@ -1,11 +1,13 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "javax.mail.jar",
         "Email stuff/javax.mail.jar",
-        "activation-1.1.jar",
         "Email stuff/activation-1.1.jar",
-        "Email stuff/smtp-1.4.5.jar"
+        "Email stuff/smtp-1.4.5.jar",
+        "Email stuff/angus-mail-2.0.3.jar",
+        "Email stuff/jakarta.mail-api-2.1.3.jar",
+        "Email stuff/jakarta.activation-api-2.1.3.jar",
+        "Email stuff/angus-activation-2.0.2.jar"
     ],
     "java.debug.settings.onBuildFailureProceed": true
 }
