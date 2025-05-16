@@ -1,5 +1,4 @@
 import java.util.*;
-import javax.mail.*;
 
 public class Student {
     private String name;
