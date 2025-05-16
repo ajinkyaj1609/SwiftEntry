@@ -1,5 +1,4 @@
 import java.util.*;
-import javax.mail.*;
 
 public class Student {
     private String name;
@@ -11,7 +10,7 @@ public class Student {
     private Date timeLeftClass;
     private String email;
     private boolean isFlagged;
-    private int numTimesLeftClass;
+    private Scans studentScans;
 
 
     public Student(String name, int id) {
@@ -23,7 +22,7 @@ public class Student {
         timesTooLongOutClass = 0;
         isAbsent = true;
         isFlagged = false;
-        numTimesLeftClass =0;
+        studentScans = new Scans(id);
     }
 
     public Student(int id) {
@@ -34,7 +33,7 @@ public class Student {
         timesTooLongOutClass = 0;
         isAbsent = true;
         isFlagged = false;
-        numTimesLeftClass =0;
+        studentScans = new Scans(id);
     }
 
     public String getName() { return name; }
@@ -101,5 +100,9 @@ public class Student {
                 "\nTimes Absent: " + timesAbsent +
                 "\nTimes Too Long Outside Class: " + timesTooLongOutClass +
                 "\n}";
+    }
+
+    public void takeScan(){
+        studentScans.Scan();
     }
 }

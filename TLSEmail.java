@@ -39,7 +39,7 @@ public class TLSEmail {
 			Message.RecipientType.TO, InternetAddress.parse("em98723122@gmail.com"));
 			message.setSubject("Mail Subject");
 
-			String msg = "This is my first email using JavaMailer";
+			String msg = "What's up how ya doing";
 
 			MimeBodyPart mimeBodyPart = new MimeBodyPart();
 			mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
