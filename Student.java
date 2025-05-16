@@ -11,6 +11,7 @@ public class Student {
     private Date timeLeftClass;
     private String email;
     private boolean isFlagged;
+    private int numTimesLeftClass;
 
 
     public Student(String name, int id) {
@@ -22,6 +23,7 @@ public class Student {
         timesTooLongOutClass = 0;
         isAbsent = true;
         isFlagged = false;
+        numTimesLeftClass =0;
     }
 
     public Student(int id) {
@@ -32,6 +34,7 @@ public class Student {
         timesTooLongOutClass = 0;
         isAbsent = true;
         isFlagged = false;
+        numTimesLeftClass =0;
     }
 
     public String getName() { return name; }
@@ -40,6 +43,7 @@ public class Student {
     public int getTimesAbsent() { return timesAbsent; }
     public int getTimesTooLongOutClass() { return timesTooLongOutClass; }
     public boolean getIsFlagged() { return isFlagged; }
+    public int getNumTimesLeftClass() { return numTimesLeftClass; }
     public void setName(String name) { this.name = name; }
     public void setId(int id) { this.id = id; }
     public void incrementTimesLate() { timesLate++; }
