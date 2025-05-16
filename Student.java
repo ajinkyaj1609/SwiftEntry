@@ -11,6 +11,7 @@ public class Student {
     private Date timeLeftClass;
     private String email;
     private boolean isFlagged;
+    private Scans studentScans;
 
 
     public Student(String name, int id) {
@@ -22,6 +23,7 @@ public class Student {
         timesTooLongOutClass = 0;
         isAbsent = true;
         isFlagged = false;
+        studentScans = new Scans(id);
     }
 
     public Student(int id) {
@@ -32,6 +34,7 @@ public class Student {
         timesTooLongOutClass = 0;
         isAbsent = true;
         isFlagged = false;
+        studentScans = new Scans(id);
     }
 
     public String getName() { return name; }
@@ -97,5 +100,9 @@ public class Student {
                 "\nTimes Absent: " + timesAbsent +
                 "\nTimes Too Long Outside Class: " + timesTooLongOutClass +
                 "\n}";
+    }
+
+    public void takeScan(){
+        studentScans.Scan();
     }
 }
