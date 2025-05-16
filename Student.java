@@ -42,7 +42,6 @@ public class Student {
     public int getTimesAbsent() { return timesAbsent; }
     public int getTimesTooLongOutClass() { return timesTooLongOutClass; }
     public boolean getIsFlagged() { return isFlagged; }
-    public int getNumTimesLeftClass() { return numTimesLeftClass; }
     public void setName(String name) { this.name = name; }
     public void setId(int id) { this.id = id; }
     public void incrementTimesLate() { timesLate++; }

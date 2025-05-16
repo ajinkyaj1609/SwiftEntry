@@ -14,6 +14,13 @@
         },
         {
             "type": "java",
+            "name": "SendEmailSSL",
+            "request": "launch",
+            "mainClass": "email.src.main.java.com.email.emailtest.SendEmailSSL",
+            "projectName": "SwiftEntry_89d89da1"
+        },
+        {
+            "type": "java",
             "name": "TLSEmail",
             "request": "launch",
             "mainClass": "TLSEmail",
