@@ -49,5 +49,21 @@ public class Main
                 catch (IOException e){
                         System.out.println("Error reading file: " + e.getMessage());
                 }
+                /*  
+                public static int firstScan(){ // checks if studet has already check in for the day. Used to distinguish attendence check ins from brief during class check outs.
+                        for(int i = 0; i<testingStudents.length; i++){
+                                if(student.getName() != testingStudent[i]){
+                                        return 1; // if 1 is return if is the first check in of the day, and therefore the attendence check in
+                                }
+                                else{
+                                        System.out.println("The student has already checked in for attendence")
+                                        return 0
+                                }
+                        }
+                }
+                public static int scanNumber(){
+                        if(student.get)
+                }
+                */
         }
 }
