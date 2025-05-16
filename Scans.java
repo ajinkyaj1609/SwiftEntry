@@ -14,13 +14,19 @@ public class Scans {
     public void Scan(){
         if (scans.size() == 0){
             Scan x = new Scan(id);
-            x.setCheckType("Check-in"); //first check in, scan size will be 1 
+            x.setCheckType("First check-in"); //first check in, scan size will be 1 
             scans.add(x);
         }
         else if (scans.size() % 2 == 0){
+            Scan x = new Scan(id);
+            x.setCheckType("Check-in");
+            scans.add(x);
             //check ins
         }
         else{
+            Scan x = new Scan(id);
+            x.setCheckType("Check-in");
+            scans.add(x);
             //check outs
         }
     }
