@@ -1,9 +1,6 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "Email stuff/javax.mail.jar",
-        "Email stuff/activation-1.1.jar",
-        "Email stuff/smtp-1.4.5.jar",
         "Email stuff/angus-mail-2.0.3.jar",
         "Email stuff/jakarta.mail-api-2.1.3.jar",
         "Email stuff/jakarta.activation-api-2.1.3.jar",
