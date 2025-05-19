@@ -30,4 +30,8 @@ public class Scan {
         checkType = x;
     }
 
+    public String getCheckType(){
+        return checkType;
+    }
+
 }

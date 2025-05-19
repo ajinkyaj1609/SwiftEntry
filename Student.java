@@ -7,7 +7,6 @@ public class Student {
     private int timesLate;
     private int timesAbsent;
     private int timesTooLongOutClass;
-    private Date timeLeftClass;
     private String email;
     private boolean isFlagged;
     private Scans studentScans;
@@ -60,22 +59,6 @@ public class Student {
     public void tardy() { 
         isAbsent = false; 
         this.incrementTimesLate();
-    }
-
-
-    public void leaveClass() {
-        timeLeftClass = new Date();
-        this.incrementTimesTooLongOutClass();
-    }
-
-    public void returnToClass() {
-        Date currentTime = new Date();
-        long timeDifference = currentTime.getTime() - timeLeftClass.getTime();
-        long timeDifferenceInMinutes = timeDifference / (1000 * 60);
-        if (timeDifferenceInMinutes > 5) {
-            this.incrementTimesTooLongOutClass();
-        }
-        timeLeftClass = null;
     }
 
     public void emailPlan() {

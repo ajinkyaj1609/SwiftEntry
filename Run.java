@@ -1,22 +1,28 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
+import java.util.ArrayList;
+
+//just used to write code, move all this to the main branch eventually 
 
 public class Run {
 
     private LocalTime startTime = LocalTime.of(12,20,0); //starttime - 1 min so that it actually starts at starttime
     private LocalTime endTime = LocalTime.of(14, 19, 9); //starttime + 1 min so that it doesn't end before endtime
     //no constructor, no private variables, just runs the program that takes in an id
-    private Scanner x = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
 
     public void run(){
-        //ArrayList x = new ArrayList<Student>; 
-        //Students list = new Students(x);
+        Students list = new Students(new ArrayList<Student>());
+        list.addStudent(123);
 
         //while loop
         while(LocalTime.now().isBefore(endTime) && LocalTime.now().isAfter(startTime)){
-            int num = x.nextInt();
-            //for(int i = 0; i < )
+            System.out.println("Type in student's id for scanning");
+            int id = input.nextInt();
+            int index = list.findIndex(id); 
+            list.accessScanner(index);
+
         }
 
     }

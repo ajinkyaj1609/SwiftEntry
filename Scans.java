@@ -29,6 +29,11 @@ public class Scans {
             scans.add(x);
             //check outs
         }
+        System.out.println("Scanned successfully");
+        System.out.println(scans.get(scans.size()-1).getId());
+        System.out.println(scans.get(scans.size()-1).getTime());
+        System.out.println(scans.get(scans.size()-1).getDate());
+        System.out.println(scans.get(scans.size()-1).getCheckType());
     }
 
 }
