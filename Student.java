@@ -62,7 +62,9 @@ public class Student {
     }
 
     public void emailPlan() {
-        
+        String msg = "Lesson Plan";
+        String email = this.email;
+        TLSEmail.sendEmail(email, msg);       
     }
 
     public Boolean isFlagged(){
