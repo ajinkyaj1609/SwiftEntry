@@ -1,6 +1,6 @@
 {
     "java.project.referencedLibraries": [
-        "lib/**/*.jar",
+        //"lib/**/*.jar",
         "Email stuff/angus-mail-2.0.3.jar",
         "Email stuff/jakarta.mail-api-2.1.3.jar",
         "Email stuff/jakarta.activation-api-2.1.3.jar",
