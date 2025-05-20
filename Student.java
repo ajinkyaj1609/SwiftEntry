@@ -62,7 +62,11 @@ public class Student {
     }
 
     public void emailPlan() {
-        String msg = "Lesson Plan";
+        String msg = Teacher.getLessonPlan();
+        if (msg == null) {
+            msg = "No lesson plan available. You should check in with your teacher.";
+            return;
+        }
         String email = this.email;
         TLSEmail.sendEmail(email, msg);       
     }

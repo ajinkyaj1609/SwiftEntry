@@ -1,7 +1,9 @@
 import java.util.Scanner;
 
+
 public class Teacher{
     private static String password;
+    private static String lessonPlan;
 
     public Teacher(){
         password = "000000";
@@ -26,12 +28,15 @@ public class Teacher{
     }
 
 
-    public String writeLessonPlan() {
+    public void writeLessonPlan() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the lesson plan details:");
         String plan = scanner.nextLine(); // Consume the newline character
-        String lessonPlan = "SwiftEntry has detected that you were absent from class. Here is your teacher's lesson plan.\n";
+        lessonPlan = "SwiftEntry has detected that you were absent from class. Here is your teacher's lesson plan.\n";
         lessonPlan += plan;
+    }
+
+    public static String getLessonPlan() {
         return lessonPlan;
     }
 }
