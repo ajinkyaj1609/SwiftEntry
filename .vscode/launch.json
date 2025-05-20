@@ -3,6 +3,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "SwiftEntry_c5331e99"
+        },
+        {
+            "type": "java",
             "name": "SendEmailSSL",
             "request": "launch",
             "mainClass": "email.src.main.java.com.email.emailtest.SendEmailSSL",
