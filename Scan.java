@@ -1,5 +1,6 @@
 import java.time.LocalTime;
 import java.time.LocalDate;
+import java.time.*;
 
 public class Scan {
     
@@ -7,11 +8,12 @@ public class Scan {
     private LocalTime time;
     private LocalDate date;
     private String checkType = null;
+    private ZoneId location = ZoneId.of("America/Los_Angeles");
     
     public Scan(int id){
         this.id = id;
-        time = LocalTime.now();
-        date = LocalDate.now();
+        time = LocalTime.now(location);
+        date = LocalDate.now(location);
     }
 
     public int getId(){

@@ -1,5 +1,3 @@
-import java.time.LocalTime; 
-import java.time.LocalDate; 
 import java.util.ArrayList; 
 
 public class Scans {
@@ -25,7 +23,7 @@ public class Scans {
         }
         else{
             Scan x = new Scan(id);
-            x.setCheckType("Check-in");
+            x.setCheckType("Check-out");
             scans.add(x);
             //check outs
         }

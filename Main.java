@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ public class Main
 {
 
         private static Scanner input = new Scanner(System.in);
+        private static ZoneId location = ZoneId.of("America/Los_Angeles");
 
         public static void main(String[] args) {
 
@@ -21,20 +23,26 @@ public class Main
 
                 //the code that takes in the input, checks which student 
                 String sT = "13:55:00"; //this time is just to check, set it to whatever time the teacher wants later
-                String eT = "14:18:09";
+                String eT = "14:36:30";
 
                 DateTimeFormatter theFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
 
                 LocalTime startTime = LocalTime.parse(sT, theFormat);
                 LocalTime endTime = LocalTime.parse(eT, theFormat);
-                LocalTime currTime = LocalTime.now();
+                LocalTime currTime = LocalTime.now(location);
 
                 //while loop
-                while(currTime.isAfter(startTime)){
+                while(currTime.isAfter(startTime) && currTime.isBefore(endTime)){
                         System.out.println("Type in student's id for scanning");
                         int id = input.nextInt();
                         int index = list.findIndex(id); 
-                        list.accessScanner(index);
+                        if (index == -1){
+                                System.out.println("ID not found");
+                        }
+                        else{
+                                list.accessScanner(index);
+                        }
+                        currTime = LocalTime.now(location); //updates currtime 
                 }
 
                 //file reading check
