@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 
 public class Teacher{
+    public void test(){
+        System.out.println("This is a test");
+    }
     private static String password;
     private static String lessonPlan;
 
@@ -101,7 +104,7 @@ public class Students {
         }
     }
 
-   public void startDay() {
+   public void startDay(){
 
         System.out.println("Please enter your password");
         Scanner scanner = new Scanner(System.in);
