@@ -1,7 +1,13 @@
 {
     "version": "0.2.0",
     "configurations": [
-        
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "SwiftEntry_c5331e99"
+        },
         {
             "type": "java",
             "name": "SendEmailSSL",
