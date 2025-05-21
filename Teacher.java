@@ -5,44 +5,35 @@ import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
-public class Teacher{
-    public void test(){
+public class Teacher {
+    public void test() {
         System.out.println("This is a test");
     }
+
     private static String password;
     private static String lessonPlan;
+    private ArrayList<Student> students = new ArrayList<>();
 
-    public Teacher(){
+    public Teacher() {
         password = "000000";
-        // TODO: implement method logic here
-        // return students;
-        String pass="000000";
     }
 
-    
-    public Teacher(String p){
+    public Teacher(String p) {
         password = p;
     }
 
-    public boolean checkPassword(String p){
-        if (p.equals(password)){
-            return true;
-        }
-        else{
-            return false;
-        }
+    public boolean checkPassword(String p) {
+        return p.equals(password);
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
-
 
     public void writeLessonPlan() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the lesson plan details:");
-        String plan = scanner.nextLine(); // Consume the newline character
+        String plan = scanner.nextLine();
         lessonPlan = "SwiftEntry has detected that you were absent from class. Here is your teacher's lesson plan.\n";
         lessonPlan += plan;
     }
@@ -50,31 +41,18 @@ public class Teacher{
     public static String getLessonPlan() {
         return lessonPlan;
     }
-   
-
-public class Students {
-
-    ArrayList<Student> students;
-
-    public Students(ArrayList<Student> x) {
-        students = x;
-    }
-
-    public void addStudent(int id) {
-        Student x = new Student(id);
-        students.add(x);
-    }
 
     public void addStudent(int id, String name) {
         Student x = new Student(name, id);
         students.add(x);
+        appendStudentToFile(x);
     }
 
-    public void removeStudents(int index) {
+    public void removeStudent(int index) {
         students.remove(index);
     }
 
-    public int findIndex(int id) {
+    public int findStudentIndex(int id) {
         for (int i = 0; i < students.size(); i++) {
             if (students.get(i).getId() == id) {
                 return i;
@@ -86,63 +64,55 @@ public class Students {
     public void accessScanner(int index) {
         students.get(index).takeScan();
     }
-      
-    public void writeStudentsToFile(Path filePath) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile()))) {
-             //Write the header if the file is new
-             if(Files.notExists(filePath) || Files.size(filePath) ==0){
+
+    private void appendStudentToFile(Student student) {
+        Path filePath = Paths.get("studentData.csv");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile(), true))) {
+            if (Files.notExists(filePath) || Files.size(filePath) == 0) {
                 writer.write("ID,Name");
                 writer.newLine();
             }
-            for (Student student : students) {
-                writer.write(student.getId() + "," + student.getName());
-                writer.newLine();
-            }
-             System.out.println("Student data written to file successfully!");
+            writer.write(student.getId() + "," + student.getName());
+            writer.newLine();
+            System.out.println("Student appended to file successfully!");
         } catch (IOException e) {
-              System.err.println("Error writing to file: " + e.getMessage());
+            System.err.println("Error appending to file: " + e.getMessage());
         }
     }
 
-   public void startDay(){
-
-        System.out.println("Please enter your password");
+    public void startDay() {
         Scanner scanner = new Scanner(System.in);
-        String p = scanner.nextLine();
-        String pass = "000000";
-        if (pass.equals(p)) {
-
+        System.out.println("Please enter your password:");
+        if (password.equals(scanner.nextLine())) {
             System.out.println("Authentication successful.");
-            System.out.println("Press 1 to start the day \n Press 2 to add a student \n Press 3 to remove a student \n Press 4 to create a lesson plan");
+            System.out.println("Press 1 to start the day \nPress 2 to add a student \nPress 3 to remove a student \nPress 4 to create a lesson plan");
             int choice = scanner.nextInt();
+            scanner.nextLine();
+
             switch (choice) {
                 case 1:
                     System.out.println("Starting the day...");
                     break;
                 case 2:
-                    System.out.println("Enter the Name of the student");
-                    String name = scanner.next();
-                    System.out.println("Enter the ID of the student");
+                    System.out.println("Enter the Name of the student:");
+                    String name = scanner.nextLine();
+                    System.out.println("Enter the ID of the student:");
                     int id = scanner.nextInt();
                     addStudent(id, name);
-
-                break;
+                    break;
                 case 3:
-                    System.out.println("Removing a student...");
+                    System.out.println("Enter index of student to remove:");
+                    int index = scanner.nextInt();
+                    removeStudent(index);
                     break;
                 case 4:
-                     System.out.println("Creating a lesson plan...");
+                    writeLessonPlan();
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-
         } else {
             System.out.println("Authentication failed.");
         }
-           Path filePath = Paths.get("studentData.csv");
-           writeStudentsToFile(filePath);
     }
-}
-
-}
+} 

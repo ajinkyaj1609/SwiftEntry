@@ -1,9 +1,8 @@
-import java.util.*;
 
 public class Student {
     private String name;
     private boolean isAbsent;
-    private int id;
+    private String id;
     private int timesLate;
     private int timesAbsent;
     private int timesTooLongOutClass;
@@ -11,54 +10,51 @@ public class Student {
     private boolean isFlagged;
     private Scans studentScans;
 
-
-    public Student(String name, int id) {
+    public Student(String name, String id) {
         this.name = name;
         this.id = id;
-        isAbsent = false;
+        isAbsent = true;
         timesLate = 0;
         timesAbsent = 0;
         timesTooLongOutClass = 0;
-        isAbsent = true;
         isFlagged = false;
-        studentScans = new Scans(id);
-    }
 
-    public Student(int id) {
-        this.id = id;
-        isAbsent = false;
-        timesLate = 0;
-        timesAbsent = 0;
-        timesTooLongOutClass = 0;
-        isAbsent = true;
-        isFlagged = false;
-        studentScans = new Scans(id);
+        // Convert id to int for Scans if possible
+        try {
+            studentScans = new Scans(Integer.parseInt(id));
+        } catch (NumberFormatException e) {
+            studentScans = new Scans(0); // fallback ID
+        }
     }
 
     public String getName() { return name; }
-    public int getId() { return id; }
+    public String getId() { return id; }
     public int getTimesLate() { return timesLate; }
     public int getTimesAbsent() { return timesAbsent; }
     public int getTimesTooLongOutClass() { return timesTooLongOutClass; }
     public boolean getIsFlagged() { return isFlagged; }
+
     public void setName(String name) { this.name = name; }
-    public void setId(int id) { this.id = id; }
+    public void setId(String id) { this.id = id; }
+
     public void incrementTimesLate() { timesLate++; }
     public void incrementTimesAbsent() { timesAbsent++; }
     public void incrementTimesTooLongOutClass() { timesTooLongOutClass++; }
+
     public void resetTimesLate() { timesLate = 0; }
     public void resetTimesAbsent() { timesAbsent = 0; }
     public void resetTimesTooLongOutClass() { timesTooLongOutClass = 0; }
+
     public void present() { isAbsent = false; }
 
     public void absent() { 
         isAbsent = true; 
-        this.incrementTimesAbsent();
+        incrementTimesAbsent();
     }
 
     public void tardy() { 
         isAbsent = false; 
-        this.incrementTimesLate();
+        incrementTimesLate();
     }
 
     public void emailPlan() {
@@ -67,19 +63,14 @@ public class Student {
             msg = "No lesson plan available. You should check in with your teacher.";
             return;
         }
-        String email = this.email;
         TLSEmail.sendEmail(email, msg);       
     }
 
     public Boolean isFlagged(){
-        if(timesLate > 5 || timesAbsent > 10 || timesTooLongOutClass > 5){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return (timesLate > 5 || timesAbsent > 10 || timesTooLongOutClass > 5);
     }
-    
+
+    @Override
     public String toString() {
         return "\nStudent{" +
                 "\nName: " + name +
