@@ -1,14 +1,21 @@
+import java.time.LocalDate;
+import java.time.*;
 
 public class Student {
+    //static var for all student objects
+    private static ZoneId location = ZoneId.of("America/Los_Angeles"); 
+    //un-changing attributes of student 
     private String name;
-    private boolean absentToday;
     private String id;
+    private String email;
+    //date specific vars 
+    private boolean absentToday;
+    private Scans studentScans;
+    //incrementing vars 
     private int timesLate;
     private int timesAbsent;
     private int timesTooLongOutClass;
-    private String email;
-    private boolean isFlagged;
-    private Scans studentScans;
+    private LocalDate date = LocalDate.now();
 
     public Student(String name, String id) {
         this.name = name;
@@ -17,7 +24,6 @@ public class Student {
         timesLate = 0;
         timesAbsent = 0;
         timesTooLongOutClass = 0;
-        isFlagged = false;
         studentScans = new Scans(id);
     }
 
@@ -27,7 +33,6 @@ public class Student {
         timesLate = 0;
         timesAbsent = 0;
         timesTooLongOutClass = 0;
-        isFlagged = false;
         studentScans = new Scans(id);
     }
 
@@ -36,7 +41,6 @@ public class Student {
     public int getTimesLate() { return timesLate; }
     public int getTimesAbsent() { return timesAbsent; }
     public int getTimesTooLongOutClass() { return timesTooLongOutClass; }
-    public boolean getIsFlagged() { return isFlagged; }
 
     public void setName(String name) { this.name = name; }
     public void setId(String id) { this.id = id; }

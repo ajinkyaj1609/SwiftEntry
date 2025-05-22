@@ -1,7 +1,4 @@
 import java.util.ArrayList;
-
-
-
 //with fork test
 public class Main {
     //arraylist of all students acceible everyehere
