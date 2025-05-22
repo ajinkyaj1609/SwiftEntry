@@ -1,40 +1,40 @@
-import java.util.ArrayList; 
+// import java.util.ArrayList; 
 
-//delete this once you move scanner testing since teacher already as this
+// //delete this once you move scanner testing since teacher already as this
 
-public class Students{
+// public class Students{
 
-    ArrayList<Student> students;
+//     ArrayList<Student> students;
 
-    public Students(ArrayList<Student> x){
-        students = x;
-    }
+//     public Students(ArrayList<Student> x){
+//         students = x;
+//     }
 
-    public void addStudent(String id){
-        Student x = new Student(id);
-        students.add(x);
-    }
+//     public void addStudent(String id){
+//         Student x = new Student(id);
+//         students.add(x);
+//     }
 
-    public void addStudent(String id, String name){
-        Student x = new Student(name, id);
-        students.add(x);
-    }
+//     public void addStudent(String id, String name){
+//         Student x = new Student(name, id);
+//         students.add(x);
+//     }
 
-    public void removeStudents(int index){
-        students.remove(index);
-    }
+//     public void removeStudents(int index){
+//         students.remove(index);
+//     }
 
-    public int findIndex(String id){
-        for (int i = 0; i < students.size(); i++){
-            if (students.get(i).getId().equals(id)){
-                return i;
-            }
-        }
-        return -1;
-    }
+//     public int findIndex(String id){
+//         for (int i = 0; i < students.size(); i++){
+//             if (students.get(i).getId().equals(id)){
+//                 return i;
+//             }
+//         }
+//         return -1;
+//     }
 
-    public void accessScanner(int index){
-        students.get(index).takeScan();
-    }
+//     public void accessScanner(int index){
+//         students.get(index).takeScan();
+//     }
 
-}
+// }
