@@ -4,19 +4,19 @@ import java.time.*;
 
 public class Scan {
     
-    private int id; 
+    private String id; 
     private LocalTime time;
     private LocalDate date;
     private String checkType = null;
     private ZoneId location = ZoneId.of("America/Los_Angeles");
     
-    public Scan(int id){
+    public Scan(String id){
         this.id = id;
         time = LocalTime.now(location);
         date = LocalDate.now(location);
     }
 
-    public int getId(){
+    public String getId(){
         return id;
     }
 

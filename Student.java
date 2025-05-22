@@ -6,7 +6,6 @@ public class Student {
     private int timesLate;
     private int timesAbsent;
     private int timesTooLongOutClass;
-    private int id;
     // private int timesLate;
     // private int timesAbsent;
     // private int timesTooLongOutClass;
@@ -25,7 +24,7 @@ public class Student {
         studentScans = new Scans(id);
     }
 
-    public Student(int id) {
+    public Student(String id) {
         this.id = id;
         isAbsent = false;
         // timesLate = 0;
@@ -36,14 +35,14 @@ public class Student {
     }
 
     public String getName() { return name; }
-    public int getId() { return id; }
+    public String getId() { return id; }
     // public int getTimesLate() { return timesLate; }
     // public int getTimesAbsent() { return timesAbsent; }
     // public int getTimesTooLongOutClass() { return timesTooLongOutClass; }
     public boolean getIsFlagged() { return isFlagged; }
 
     public void setName(String name) { this.name = name; }
-    public void setId(int id) { this.id = id; }
+    public void setId(String id) { this.id = id; }
     // public void incrementTimesLate() { timesLate++; }
     // public void incrementTimesAbsent() { timesAbsent++; }
     // public void incrementTimesTooLongOutClass() { timesTooLongOutClass++; }

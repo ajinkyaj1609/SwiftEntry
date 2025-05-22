@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
+import java.time.*;
 import java.nio.file.Files;
 import java.io.File;
 import java.io.IOException;
@@ -8,29 +9,36 @@ import java.util.ArrayList;
 import java.util.List;
 public class ScannerTesting {
     private static Scanner input = new Scanner(System.in);
+    private static ZoneId location = ZoneId.of("America/Los_Angeles");
 
         public static void main(String[] args) {
 
                 //adding student to test scan method 
                 Students list = new Students(new ArrayList<Student>());
-                list.addStudent(123);
+                list.addStudent("123");
 
                 //the code that takes in the input, checks which student 
-                String sT = "13:55:00"; //this time is just to check, set it to whatever time the teacher wants later
-                String eT = "14:18:09";
+                String sT = "17:25:00"; //this time is just to check, set it to whatever time the teacher wants later
+                String eT = "18:18:09";
 
                 DateTimeFormatter theFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
 
                 LocalTime startTime = LocalTime.parse(sT, theFormat);
                 LocalTime endTime = LocalTime.parse(eT, theFormat);
-                LocalTime currTime = LocalTime.now();
+                LocalTime currTime = LocalTime.now(location);
 
                 //while loop
-                while(currTime.isAfter(startTime)){
+                while(currTime.isAfter(startTime) && currTime.isBefore(endTime)){
                         System.out.println("Type in student's id for scanning");
-                        int id = input.nextInt();
+                        String id = input.nextLine();
                         int index = list.findIndex(id); 
-                        list.accessScanner(index);
+                        if (index == - 1){
+                                System.out.println("Id not found");
+                        }
+                        else{
+                                list.accessScanner(index);
+                        }
+                        currTime = LocalTime.now(location);
                 }
 
                 //file reading check

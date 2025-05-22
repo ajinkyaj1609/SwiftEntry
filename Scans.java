@@ -3,9 +3,9 @@ import java.util.ArrayList;
 public class Scans {
     //these are an individual student's scans, not scans overall 
     ArrayList<Scan> scans = new ArrayList<>();
-    private int id;
+    private String id;
 
-    public Scans(int id){
+    public Scans(String id){
         this.id = id;
     }
 

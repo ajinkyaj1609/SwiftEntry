@@ -8,12 +8,12 @@ public class Students{
         students = x;
     }
 
-    public void addStudent(int id){
+    public void addStudent(String id){
         Student x = new Student(id);
         students.add(x);
     }
 
-    public void addStudent(int id, String name){
+    public void addStudent(String id, String name){
         Student x = new Student(name, id);
         students.add(x);
     }
@@ -22,9 +22,9 @@ public class Students{
         students.remove(index);
     }
 
-    public int findIndex(int id){
+    public int findIndex(String id){
         for (int i = 0; i < students.size(); i++){
-            if (students.get(i).getId() == id){
+            if (students.get(i).getId().equals(id)){
                 return i;
             }
         }
