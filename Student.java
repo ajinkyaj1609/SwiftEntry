@@ -2,6 +2,10 @@
 public class Student {
     private String name;
     private boolean isAbsent;
+    private String id;
+    private int timesLate;
+    private int timesAbsent;
+    private int timesTooLongOutClass;
     private int id;
     // private int timesLate;
     // private int timesAbsent;
@@ -10,8 +14,7 @@ public class Student {
     private boolean isFlagged;
     private Scans studentScans;
 
-
-    public Student(String name, int id) {
+    public Student(String name, String id) {
         this.name = name;
         this.id = id;
         isAbsent = false;
@@ -38,6 +41,7 @@ public class Student {
     // public int getTimesAbsent() { return timesAbsent; }
     // public int getTimesTooLongOutClass() { return timesTooLongOutClass; }
     public boolean getIsFlagged() { return isFlagged; }
+
     public void setName(String name) { this.name = name; }
     public void setId(int id) { this.id = id; }
     // public void incrementTimesLate() { timesLate++; }
@@ -63,7 +67,6 @@ public class Student {
             msg = "No lesson plan available. You should check in with your teacher.";
             return;
         }
-        String email = this.email;
         TLSEmail.sendEmail(email, msg);       
     }
 
