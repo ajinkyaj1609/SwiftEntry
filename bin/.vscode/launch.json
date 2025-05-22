@@ -1,0 +1,67 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "ScannerTesting",
+            "request": "launch",
+            "mainClass": "ScannerTesting",
+            "projectName": "SwiftEntry_89d89da1"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "SwiftEntry_c5331e99"
+        },
+        {
+            "type": "java",
+            "name": "SendEmailSSL",
+            "request": "launch",
+            "mainClass": "email.src.main.java.com.email.emailtest.SendEmailSSL",
+            "projectName": "SwiftEntry_89d89da1"
+        },
+        {
+            "type": "java",
+            "name": "TLSEmail",
+            "request": "launch",
+            "mainClass": "TLSEmail",
+            "projectName": "SwiftEntry_89d89da1"
+        },
+        {
+            "type": "java",
+            "name": "SendEmail",
+            "request": "launch",
+            "mainClass": "SendEmail",
+            "projectName": "SwiftEntry_89d89da1"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "SwiftEntry_48b9538b"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "SwiftEntry_89d89da1"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "TemplateBOt_1b62bcb"
+        }
+    ]
+}
