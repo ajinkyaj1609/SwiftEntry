@@ -52,7 +52,7 @@ public class Teacher {
         students.remove(index);
     }
 
-    public int findStudentIndex(int id) {
+    public int findStudentIndex(String id) {
         for (int i = 0; i < students.size(); i++) {
             if (students.get(i).getId() == id) {
                 return i;
