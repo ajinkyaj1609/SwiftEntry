@@ -9,11 +9,9 @@ import java.util.Scanner;
 import java.time.format.DateTimeFormatter; //stuff for starting day- scanner testing is moved into teacher
 import java.time.LocalTime;
 import java.time.*;
-//serialization imports 
-import java.io.*;
 
 
-public class Teacher implements Serializable {
+public class Teacher{
 
     private static String password;
     private static String lessonPlan;
