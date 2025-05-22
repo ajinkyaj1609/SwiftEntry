@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.format.DateTimeFormatter; //stuff for starting day- scanner testing is moved into teacher
+import java.time.LocalTime;
+import java.time.*;
 
 public class Teacher {
     public void test() {
@@ -82,6 +85,7 @@ public class Teacher {
 
     public void startDay() {
         Scanner scanner = new Scanner(System.in);
+        ZoneId location = ZoneId.of("America/Los_Angeles");
         System.out.println("Please enter your password:");
         if (password.equals(scanner.nextLine())) {
             System.out.println("Authentication successful.");
@@ -92,6 +96,31 @@ public class Teacher {
             switch (choice) {
                 case 1:
                     System.out.println("Starting the day...");
+
+                    String sT = "17:25:00"; //class startTime/endTime
+                    String eT = "18:18:09";
+
+                    DateTimeFormatter theFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
+                    LocalTime startTime = LocalTime.parse(sT, theFormat);
+                    LocalTime endTime = LocalTime.parse(eT, theFormat);
+                    LocalTime currTime = LocalTime.now(location);
+
+                    while(currTime.isAfter(startTime) && currTime.isBefore(endTime)){
+                        System.out.println("Type in student's id for scanning");
+                        String id = scanner.nextLine();
+                        int index = findStudentIndex(id); 
+                        if (index == - 1){
+                                System.out.println("Id not found");
+                        }
+                        else{
+                                accessScanner(index);
+                        }
+                        currTime = LocalTime.now(location);
+                    }
+                    if (!currTime.isAfter(startTime) || !currTime.isBefore(endTime)){
+                        System.out.println("Class has not started yet, come back when class starts.");
+                    }
+
                     break;
                 case 2:
                     System.out.println("Enter the Name of the student:");
@@ -101,8 +130,9 @@ public class Teacher {
                     addStudent(id, name);
                     break;
                 case 3:
-                    System.out.println("Enter index of student to remove:");
-                    int index = scanner.nextInt();
+                    System.out.println("Enter ID of student to remove:");
+                    String ID = scanner.nextLine();
+                    int index = findStudentIndex(ID);
                     removeStudent(index);
                     break;
                 case 4:

@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+//class can be deleted when everything has been moved to teacher
 public class ScannerTesting {
     private static Scanner input = new Scanner(System.in);
     private static ZoneId location = ZoneId.of("America/Los_Angeles");
@@ -18,7 +20,7 @@ public class ScannerTesting {
                 list.addStudent("123");
 
                 //the code that takes in the input, checks which student 
-                String sT = "17:25:00"; //this time is just to check, set it to whatever time the teacher wants later
+                String sT = "17:25:00"; //class startTime/endTime
                 String eT = "18:18:09";
 
                 DateTimeFormatter theFormat = DateTimeFormatter.ofPattern("HH:mm:ss");

@@ -1,5 +1,7 @@
 import java.util.ArrayList; 
 
+//delete this once you move scanner testing since teacher already as this
+
 public class Students{
 
     ArrayList<Student> students;

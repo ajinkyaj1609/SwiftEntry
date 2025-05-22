@@ -1,14 +1,11 @@
 
 public class Student {
     private String name;
-    private boolean isAbsent;
+    private boolean absentToday;
     private String id;
     private int timesLate;
     private int timesAbsent;
     private int timesTooLongOutClass;
-    // private int timesLate;
-    // private int timesAbsent;
-    // private int timesTooLongOutClass;
     private String email;
     private boolean isFlagged;
     private Scans studentScans;
@@ -16,48 +13,48 @@ public class Student {
     public Student(String name, String id) {
         this.name = name;
         this.id = id;
-        isAbsent = false;
-        // timesLate = 0;
-        // timesAbsent = 0;
-        // timesTooLongOutClass = 0;
+        absentToday = false;
+        timesLate = 0;
+        timesAbsent = 0;
+        timesTooLongOutClass = 0;
         isFlagged = false;
         studentScans = new Scans(id);
     }
 
     public Student(String id) {
         this.id = id;
-        isAbsent = false;
-        // timesLate = 0;
-        // timesAbsent = 0;
-        // timesTooLongOutClass = 0;
+        absentToday = false;
+        timesLate = 0;
+        timesAbsent = 0;
+        timesTooLongOutClass = 0;
         isFlagged = false;
         studentScans = new Scans(id);
     }
 
     public String getName() { return name; }
     public String getId() { return id; }
-    // public int getTimesLate() { return timesLate; }
-    // public int getTimesAbsent() { return timesAbsent; }
-    // public int getTimesTooLongOutClass() { return timesTooLongOutClass; }
+    public int getTimesLate() { return timesLate; }
+    public int getTimesAbsent() { return timesAbsent; }
+    public int getTimesTooLongOutClass() { return timesTooLongOutClass; }
     public boolean getIsFlagged() { return isFlagged; }
 
     public void setName(String name) { this.name = name; }
     public void setId(String id) { this.id = id; }
-    // public void incrementTimesLate() { timesLate++; }
-    // public void incrementTimesAbsent() { timesAbsent++; }
-    // public void incrementTimesTooLongOutClass() { timesTooLongOutClass++; }
-    // public void resetTimesLate() { timesLate = 0; }
-    // public void resetTimesAbsent() { timesAbsent = 0; }
-    // public void resetTimesTooLongOutClass() { timesTooLongOutClass = 0; }
+    public void incrementTimesLate() { timesLate++; }
+    public void incrementTimesAbsent() { timesAbsent++; }
+    public void incrementTimesTooLongOutClass() { timesTooLongOutClass++; }
+    public void resetTimesLate() { timesLate = 0; }
+    public void resetTimesAbsent() { timesAbsent = 0; }
+    public void resetTimesTooLongOutClass() { timesTooLongOutClass = 0; }
 
     public void absent() { 
-        isAbsent = true; 
-        // this.incrementTimesAbsent();
+        absentToday = true; 
+        this.incrementTimesAbsent();
     }
 
     public void tardy() { 
-        isAbsent = false; 
-        // this.incrementTimesLate();
+        absentToday = false; 
+        this.incrementTimesLate();
     }
 
     public void emailPlan() {
@@ -82,9 +79,9 @@ public class Student {
         return "\nStudent{" +
                 "\nName: " + name +
                 "\nID: " + id +
-                // "\nTimes Late: " + timesLate +
-                // "\nTimes Absent: " + timesAbsent +
-                // "\nTimes Too Long Outside Class: " + timesTooLongOutClass +
+                "\nTimes Late: " + timesLate +
+                "\nTimes Absent: " + timesAbsent +
+                "\nTimes Too Long Outside Class: " + timesTooLongOutClass +
                 "\n}";
     }
 
