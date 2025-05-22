@@ -83,6 +83,14 @@ public class Teacher {
         }
     }
 
+    private void removeStudentFromFile(Student student){
+        //write code here 
+    }
+
+    private void updateStudentList(Student student){
+        //updates arraylist each time updates happen 
+    }
+
     public void startDay() {
         Scanner scanner = new Scanner(System.in);
         ZoneId location = ZoneId.of("America/Los_Angeles");
