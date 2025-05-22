@@ -2,16 +2,18 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
+//reg imports 
 import java.util.ArrayList;
 import java.util.Scanner;
+//time imports 
 import java.time.format.DateTimeFormatter; //stuff for starting day- scanner testing is moved into teacher
 import java.time.LocalTime;
 import java.time.*;
+//serialization imports 
+import java.io.*;
 
-public class Teacher {
-    public void test() {
-        System.out.println("This is a test");
-    }
+
+public class Teacher implements Serializable {
 
     private static String password;
     private static String lessonPlan;
@@ -85,10 +87,16 @@ public class Teacher {
 
     private void removeStudentFromFile(Student student){
         //write code here 
+        //should also update arraylist in teacher 
     }
 
     private void updateStudentList(Student student){
         //updates arraylist each time updates happen 
+    }
+
+    private void updateAndReset(){
+        //updates all student objects with their values and then resets the file for the next day 
+        //student object keeps track of what they need to knwo 
     }
 
     public void startDay() {
