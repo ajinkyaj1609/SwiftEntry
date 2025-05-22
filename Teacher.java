@@ -42,7 +42,7 @@ public class Teacher {
         return lessonPlan;
     }
 
-    public void addStudent(int id, String name) {
+    public void addStudent(String id, String name) {
         Student x = new Student(name, id);
         students.add(x);
         appendStudentToFile(x);
@@ -97,7 +97,7 @@ public class Teacher {
                     System.out.println("Enter the Name of the student:");
                     String name = scanner.nextLine();
                     System.out.println("Enter the ID of the student:");
-                    int id = scanner.nextInt();
+                    String id = scanner.nextLine();
                     addStudent(id, name);
                     break;
                 case 3:
