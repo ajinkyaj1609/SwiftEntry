@@ -9,7 +9,6 @@ public class Main {
 
     public static void main(String[] args){
         //moved everything to ScannerTesting.java
-        
         String[] names = {"Alice", "Bob", "Charlie"};
         int[] ids = {101, 102, 103};
         for (int i = 0; i < ids.length; i++) {

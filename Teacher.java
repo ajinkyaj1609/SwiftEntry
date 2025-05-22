@@ -89,59 +89,72 @@ public class Teacher {
         System.out.println("Please enter your password:");
         if (password.equals(scanner.nextLine())) {
             System.out.println("Authentication successful.");
-            System.out.println("Press 1 to start the day \nPress 2 to add a student \nPress 3 to remove a student \nPress 4 to create a lesson plan");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            boolean quit = false; 
+            while (quit == false){
+                System.out.println("Press 1 to start the day \nPress 2 to add a student \nPress 3 to remove a student \nPress 4 to create a lesson plan. Type 5 to quit");
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+                switch (choice) {
+                    case 1:
+                        System.out.println("Starting the day...");
 
-            switch (choice) {
-                case 1:
-                    System.out.println("Starting the day...");
+                        String sT = "17:25:00"; //class startTime/endTime
+                        String eT = "18:18:09";
 
-                    String sT = "17:25:00"; //class startTime/endTime
-                    String eT = "18:18:09";
+                        DateTimeFormatter theFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
+                        LocalTime startTime = LocalTime.parse(sT, theFormat);
+                        LocalTime endTime = LocalTime.parse(eT, theFormat);
+                        LocalTime currTime = LocalTime.now(location);
+                        boolean tooEarly = false;
 
-                    DateTimeFormatter theFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
-                    LocalTime startTime = LocalTime.parse(sT, theFormat);
-                    LocalTime endTime = LocalTime.parse(eT, theFormat);
-                    LocalTime currTime = LocalTime.now(location);
+                        if (!currTime.isAfter(startTime) || !currTime.isBefore(endTime)){
+                            System.out.println("Class has not started yet, come back when class starts.");
+                            tooEarly = true;
+                        }
 
-                    while(currTime.isAfter(startTime) && currTime.isBefore(endTime)){
-                        System.out.println("Type in student's id for scanning");
-                        String id = scanner.nextLine();
-                        int index = findStudentIndex(id); 
-                        if (index == - 1){
+                        while(currTime.isAfter(startTime) && currTime.isBefore(endTime)){
+                            System.out.println("Type in student's id for scanning");
+                            String id = scanner.nextLine();
+                            int index = findStudentIndex(id); 
+                            if (index == - 1){
                                 System.out.println("Id not found");
-                        }
-                        else{
+                            }
+                            else{
                                 accessScanner(index);
+                            }
+                            currTime = LocalTime.now(location);
                         }
-                        currTime = LocalTime.now(location);
-                    }
-                    if (!currTime.isAfter(startTime) || !currTime.isBefore(endTime)){
-                        System.out.println("Class has not started yet, come back when class starts.");
-                    }
+                    
+                        if (tooEarly == false){
+                            System.out.println("Class has ended");
+                        }
 
-                    break;
-                case 2:
-                    System.out.println("Enter the Name of the student:");
-                    String name = scanner.nextLine();
-                    System.out.println("Enter the ID of the student:");
-                    String id = scanner.nextLine();
-                    addStudent(id, name);
-                    break;
-                case 3:
-                    System.out.println("Enter ID of student to remove:");
-                    String ID = scanner.nextLine();
-                    int index = findStudentIndex(ID);
-                    removeStudent(index);
-                    break;
-                case 4:
-                    writeLessonPlan();
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+                        break;
+                    case 2:
+                        System.out.println("Enter the Name of the student:");
+                        String name = scanner.nextLine();
+                        System.out.println("Enter the ID of the student:");
+                        String id = scanner.nextLine();
+                        addStudent(id, name);
+                        break;
+                    case 3:
+                        System.out.println("Enter ID of student to remove:");
+                        String ID = scanner.nextLine();
+                        int index = findStudentIndex(ID);
+                        removeStudent(index);
+                        break;
+                    case 4:
+                        writeLessonPlan();
+                        break;
+                    case 5: 
+                        quit = true; 
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                }
             }
-        } else {
+        } 
+        else {
             System.out.println("Authentication failed.");
         }
     }
