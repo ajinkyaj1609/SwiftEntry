@@ -69,7 +69,7 @@ public class Teacher{
     }
 
     private void appendStudentToFile(Student student) {
-        Path filePath = Paths.get("studentData.csv");
+        Path filePath = Paths.get("studentList.csv");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile(), true))) {
             if (Files.notExists(filePath) || Files.size(filePath) == 0) {
                 writer.write("ID,Name");
