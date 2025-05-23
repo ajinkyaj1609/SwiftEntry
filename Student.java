@@ -18,7 +18,7 @@ public class Student {
     private int timeSpentOutOfClass;
     private LocalDate date = LocalDate.now();
 
-    public Student(String name, String id, String email, Scans studentScans, int timesLate, int timesAbsent, int timesTooLongOutClass, int timeSpentOutOfClass) {
+    public Student(String name, String id, String email, int timesLate, int timesAbsent, int timesTooLongOutClass, int timeSpentOutOfClass) {
         this.name = name;
         this.id = id;
         absentToday = true;
@@ -108,4 +108,6 @@ public class Student {
     public void takeScan(){
         studentScans.Scan();
     }
+
+    public void importStudents()
 }
