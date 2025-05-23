@@ -15,6 +15,7 @@ public class Main {
         //     System.out.println(s);
         // }
         Teacher prof = new Teacher();
+        
         prof.startDay();
        
     }    
