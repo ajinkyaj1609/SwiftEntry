@@ -109,5 +109,18 @@ public class Student {
         studentScans.Scan();
     }
 
-    public void importStudents()
+    public void GetData(){}
+
+    public void importStudents(String name, String id, String email, int timesLate, int timesAbsent, int timesTooLongOutClass, int timeSpentOutOfClass){
+        this.name = name;
+        this.id = id;
+        absentToday = true;
+        this.timesLate = timesLate;
+        this.timesAbsent = timesAbsent;
+        this.timesTooLongOutClass =timesTooLongOutClass ;
+        studentScans = new Scans(id);
+        this.email = email;
+        this.timeSpentOutOfClass = timeSpentOutOfClass;
+
+    }
 }
