@@ -3,6 +3,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List; // Import ArrayList
 
 public class Student {
     //static var for all student objects
@@ -13,7 +15,7 @@ public class Student {
     private String email;
     //date specific vars 
     private boolean absentToday;
-    private Scans studentScans;
+    private Scans studentScans; // Assuming Scans class exists
     //incrementing vars 
     private int timesLate;
     private int timesAbsent;
@@ -21,16 +23,24 @@ public class Student {
     private int timeSpentOutOfClass;
     private LocalDate date = LocalDate.now();
 
-    public Student(String name, String id, String email, int timesLate, int timesAbsent, int timesTooLongOutClass, int timeSpentOutOfClass) {
+    // Constructor to create a Student object from parsed CSV data
+    public Student(String id, String name, String email, int timesLate, int timesAbsent, int timesTooLongOutClass, int timeSpentOutOfClass) {
+        this.id = id; // Note: Constructor parameter order changed to match CSV (ID, Name, Email...)
         this.name = name;
-        this.id = id;
-        absentToday = true;
+        this.email = email;
         this.timesLate = timesLate;
         this.timesAbsent = timesAbsent;
         this.timesTooLongOutClass =timesTooLongOutClass ;
-        studentScans = new Scans(id);
-        this.email = email;
         this.timeSpentOutOfClass = timeSpentOutOfClass;
+        
+        // Initialize other fields with default values or based on logic
+        this.absentToday = true; // Default to absent, can be changed later
+        this.studentScans = new Scans(id); // Initialize Scans for this student
+    }
+
+    // Constructor for creating a new student with minimal info (rest set to zero/empty)
+    public Student(String id, String name) {
+        this(id, name, "", 0, 0, 0, 0); // Call the main constructor with default values
     }
 
 
@@ -80,13 +90,14 @@ public class Student {
         absentToday = false; 
     }
 
+    // Assuming Teacher and TLSEmail classes exist
     public void emailPlan() {
-        String msg = Teacher.getLessonPlan();
-        if (msg == null) {
+        String msg = Teacher.getLessonPlan(); // Assuming Teacher.getLessonPlan() is static
+        if (msg == null || msg.isEmpty()) { // Check for null or empty message
             msg = "No lesson plan available. You should check in with your teacher.";
-            return;
+            // No return here, proceed to send email with default message
         }
-        TLSEmail.sendEmail(email, msg);       
+        TLSEmail.sendEmail(email, msg); // Assuming TLSEmail.sendEmail is static
     }
 
     // public Boolean isFlagged(){
@@ -98,21 +109,29 @@ public class Student {
     //     }
     // }
     
+    @Override
     public String toString() {
-        return "\nStudent{" +
-                "\nName: " + name +
-                "\nID: " + id +
-                "\nTimes Late: " + timesLate +
-                "\nTimes Absent: " + timesAbsent +
-                "\nTimes Too Long Outside Class: " + timesTooLongOutClass +
-                "\n}";
+    return "Student [ID=" + id + ", Name=" + name + ", Email=" + email +
+           ", TimesLate=" + timesLate + ", TimesAbsent=" + timesAbsent +
+           ", TimesTooLongOutClass=" + timesTooLongOutClass +
+           ", TimeSpentOutOfClass=" + timeSpentOutOfClass + "]";
     }
 
     public void takeScan(){
         studentScans.Scan();
     }
 
-    public void GetData(java.nio.file.Path filePath) {try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {
+    /**
+     * Reads student data from a CSV file and returns a List of Student objects.
+     * This method is static as it operates on the file, not a specific Student instance.
+     *
+     * @param filePath The Path to the CSV file (e.g., Paths.get("studentList.csv")).
+     * @return A List of Student objects read from the CSV. Returns an empty list if an error occurs.
+     */
+    public static List<Student> GetData(java.nio.file.Path filePath) {
+        List<Student> students = new ArrayList<>(); // Initialize the list to store students
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {
             String line;
             int lineNumber = 0;
 
@@ -129,7 +148,7 @@ public class Student {
                 String[] data = line.split(",");
 
                 // Ensure the line has the expected number of fields before parsing
-                if (data.length == 7) { // ID,Name,Email,TimesLate,TimesAbsent,TimesTooLongOutClass,TimeSpentOutOfClass
+                if (data.length == 7) { // Expected fields: ID,Name,Email,TimesLate,TimesAbsent,TimesTooLongOutClass,TimeSpentOutOfClass
                     try {
                         String id = data[0].trim();
                         String name = data[1].trim();
@@ -141,7 +160,10 @@ public class Student {
 
                         // Create a Student object from the parsed data
                         Student student = new Student(id, name, email, timesLate, timesAbsent, timesTooLongOutClass, timeSpentOutOfClass);
-                        System.out.println("Read student: " + student);
+                        
+                        // Add the created Student object to the ArrayList
+                        students.add(student);
+                        // System.out.println("Added student: " + student.getName() + " to list."); // Optional: print as students are added
 
                     } catch (NumberFormatException e) {
                         System.err.println("Error parsing number on line " + lineNumber + ": " + line + " - " + e.getMessage());
@@ -153,12 +175,17 @@ public class Student {
                 }
             }
             System.out.println("\nFinished reading CSV file.");
+            return students; // Return the populated list of students
 
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
             System.err.println("Please ensure 'studentList.csv' exists in the same directory as the compiled Java code.");
-        }}
+            return new ArrayList<>(); // Return an empty list on error
+        }
+    }
 
+    // This method seems to be for initializing an *existing* Student object's fields,
+    // not for importing multiple students from a CSV. Keeping as is per previous context.
     public void importStudents(String name, String id, String email, int timesLate, int timesAbsent, int timesTooLongOutClass, int timeSpentOutOfClass){
         this.name = name;
         this.id = id;
@@ -169,6 +196,5 @@ public class Student {
         studentScans = new Scans(id);
         this.email = email;
         this.timeSpentOutOfClass = timeSpentOutOfClass;
-
     }
 }

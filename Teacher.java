@@ -70,18 +70,37 @@ public class Teacher{
 
     private void appendStudentToFile(Student student) {
         //this saves the list of students
+        String id= student.getId();
+        String name= student.getName();
         //should also update local arraylist when run
         Path filePath = Paths.get("studentList.csv");
+
+        // Default values for the remaining fields
+        String email = ""; // Empty string for email
+        int timesLate = 0;
+        int timesAbsent = 0;
+        int timesTooLongOutClass = 0;
+        int timeSpentOutOfClass = 0;
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile(), true))) {
+            // If the file does not exist or is empty, write the header row
             if (Files.notExists(filePath) || Files.size(filePath) == 0) {
-                writer.write("ID,Name");
+                writer.write("ID,Name,Email,TimesLate,TimesAbsent,TimesTooLongOutClass,TimeSpentOutOfClass");
                 writer.newLine();
             }
-            writer.write(student.getId() + "," + student.getName());
-            writer.newLine();
-            System.out.println("Student appended to file successfully!");
+
+            // Write the new student's data, including ID, Name, and the default values for other fields
+            writer.write(id + "," +
+                         name + "," +
+                         email + "," +
+                         timesLate + "," +
+                         timesAbsent + "," +
+                         timesTooLongOutClass + "," +
+                         timeSpentOutOfClass);
+            writer.newLine(); // Move to the next line for the next entry
+            System.out.println("Student '" + name + "' (ID: " + id + ") appended to file successfully!");
         } catch (IOException e) {
-            System.err.println("Error appending to file: " + e.getMessage());
+            System.err.println("Error appending student '" + name + "' to file: " + e.getMessage());
         }
     }
 
@@ -165,9 +184,13 @@ public class Teacher{
                         addStudent(id, name);
                         break;
                     case 3:
+                        for(int i = 0; i < students.size(); i++){
+                            System.out.println(students.get(i));
+                        }
                         System.out.println("Enter ID of student to remove:");
                         String ID = scanner.nextLine();
                         int index = findStudentIndex(ID);
+                        
                         removeStudent(index);
                         break;
                     case 4:
