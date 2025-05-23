@@ -1,4 +1,5 @@
 import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
@@ -69,6 +70,8 @@ public class Teacher{
     }
 
     private void appendStudentToFile(Student student) {
+        //this saves the list of students
+        //should also update local arraylist when run
         Path filePath = Paths.get("studentList.csv");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile(), true))) {
             if (Files.notExists(filePath) || Files.size(filePath) == 0) {
@@ -84,17 +87,28 @@ public class Teacher{
     }
 
     private void removeStudentFromFile(Student student){
-        //write code here 
-        //should also update arraylist in teacher 
-    }
-
-    private void updateStudentList(Student student){
-        //updates arraylist each time updates happen 
+        //this removes students
+        //should also update local arraylist when run
     }
 
     private void updateAndReset(){
-        //updates all student objects with their values and then resets the file for the next day 
-        //student object keeps track of what they need to knwo 
+        //start of day method that updates all student objects with saved student data and clears saved student data since it will be replaced by today's data
+    }
+
+    private void saveStudentData(Student student){
+        //this saves the information that we need to flagging 
+        Path filePath = Paths.get("studentData.csv");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile(), true))) {
+            if (Files.notExists(filePath) || Files.size(filePath) == 0) {
+                writer.write("ID,timesLate, timesAbsent, timesTooLongOutClass");
+                writer.newLine();
+            }
+            writer.write(student.getId() + "," + student.getTimesLate() + "," + student.getTimesAbsent() + "," + student.getTimesTooLongOutClass());
+            writer.newLine();
+            System.out.println("Student data appended to file successfully!");
+        } catch (IOException e) {
+            System.err.println("Error appending to file: " + e.getMessage());
+        }
     }
 
     public void startDay() {
