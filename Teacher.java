@@ -1,15 +1,14 @@
 import java.io.BufferedWriter;
-import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.*;
-//reg imports 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalTime;
+import java.time.ZoneId; //stuff for starting day- scanner testing is moved into teacher
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
-//time imports 
-import java.time.format.DateTimeFormatter; //stuff for starting day- scanner testing is moved into teacher
-import java.time.LocalTime;
-import java.time.*;
 
 
 public class Teacher{
@@ -47,7 +46,7 @@ public class Teacher{
     }
 
     public void addStudent(String id, String name) {
-        Student x = new Student(name, id);
+        Student x = new Student(id, name, "", 0, 0, 0, 0);
         students.add(x);
         appendStudentToFile(x);
     }

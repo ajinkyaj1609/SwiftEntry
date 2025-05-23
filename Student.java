@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
@@ -109,7 +112,52 @@ public class Student {
         studentScans.Scan();
     }
 
-    public void GetData(){}
+    public void GetData(java.nio.file.Path filePath) {try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {
+            String line;
+            int lineNumber = 0;
+
+            // Loop through each line of the CSV file
+            while ((line = reader.readLine()) != null) {
+                lineNumber++;
+                // Skip the header line (first line)
+                if (lineNumber == 1) {
+                    System.out.println("Header: " + line); // Print header for verification
+                    continue; // Move to the next line
+                }
+
+                // Split the line by comma to get individual data fields
+                String[] data = line.split(",");
+
+                // Ensure the line has the expected number of fields before parsing
+                if (data.length == 7) { // ID,Name,Email,TimesLate,TimesAbsent,TimesTooLongOutClass,TimeSpentOutOfClass
+                    try {
+                        String id = data[0].trim();
+                        String name = data[1].trim();
+                        String email = data[2].trim();
+                        int timesLate = Integer.parseInt(data[3].trim());
+                        int timesAbsent = Integer.parseInt(data[4].trim());
+                        int timesTooLongOutClass = Integer.parseInt(data[5].trim());
+                        int timeSpentOutOfClass = Integer.parseInt(data[6].trim());
+
+                        // Create a Student object from the parsed data
+                        Student student = new Student(id, name, email, timesLate, timesAbsent, timesTooLongOutClass, timeSpentOutOfClass);
+                        System.out.println("Read student: " + student);
+
+                    } catch (NumberFormatException e) {
+                        System.err.println("Error parsing number on line " + lineNumber + ": " + line + " - " + e.getMessage());
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.err.println("Not enough data fields on line " + lineNumber + ": " + line + " - " + e.getMessage());
+                    }
+                } else {
+                    System.err.println("Skipping malformed line " + lineNumber + " (incorrect number of fields): " + line);
+                }
+            }
+            System.out.println("\nFinished reading CSV file.");
+
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+            System.err.println("Please ensure 'studentList.csv' exists in the same directory as the compiled Java code.");
+        }}
 
     public void importStudents(String name, String id, String email, int timesLate, int timesAbsent, int timesTooLongOutClass, int timeSpentOutOfClass){
         this.name = name;
