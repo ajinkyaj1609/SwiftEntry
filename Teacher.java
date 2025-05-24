@@ -47,7 +47,7 @@ public class Teacher{
     }
 
     public void addStudent(String id, String name) {
-        Student x = new Student(name, id);
+        Student x = new Student(name, id, "no email", 0, 0, 0, 0);
         students.add(x);
         appendStudentToFile(x);
     }
