@@ -14,9 +14,8 @@ public class TLSEmail {
 	   Use Authentication: Yes
 	   Port for TLS/STARTTLS: 587
 	 */
-	public static void main(String[] args) {
-		
-		
+
+		public static void sendEmail(String email, String msg) {
 		prop = new Properties();
 		prop.put("mail.smtp.auth", true);
 		prop.put("mail.smtp.starttls.enable", "true");
@@ -25,10 +24,8 @@ public class TLSEmail {
 		prop.put("mail.smtp.tls.trust", "smtp.gmail.com");
 		prop.put("mail.stmp.tls.enable", "true");
 		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-		
-	}
 
-		public static void sendEmail(String email, String msg) {
+
 
 		Session session = Session.getInstance(prop, new Authenticator() {
 		@Override
@@ -45,11 +42,14 @@ public class TLSEmail {
 			message.setSubject("Lesson Plan");
 
 	
-
+			MimeBodyPart mimeHeaderPart = new MimeBodyPart();
+			mimeHeaderPart.setContent("<h3>SwiftEntry Has detected that you were absent from class today. Here is your teacher's lesson plan:</h3><br>", "text/html; charset=utf-8");
+			
 			MimeBodyPart mimeBodyPart = new MimeBodyPart();
 			mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
 
 			Multipart multipart = new MimeMultipart();
+			multipart.addBodyPart(mimeHeaderPart);
 			multipart.addBodyPart(mimeBodyPart);
 
 			message.setContent(multipart);

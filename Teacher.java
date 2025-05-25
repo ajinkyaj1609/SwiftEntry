@@ -43,8 +43,8 @@ public class Teacher{
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the lesson plan details:");
         String plan = scanner.nextLine();
-        lessonPlan = "SwiftEntry has detected that you were absent from class. Here is your teacher's lesson plan.\n";
         lessonPlan += plan;
+        System.out.println("Lesson plan saved successfully.\n");
     }
 
     public static String getLessonPlan() {
@@ -228,6 +228,13 @@ public class Teacher{
                                 }
                                 if (student.getStudentScans().getScansSize() == 0){ 
                                     student.incrementTimesAbsent(); //increments times absent if absent 
+                                    if (student.getEmail() != null && !student.getEmail().isEmpty()) {
+                                        // Send email if email is set
+                                        student.emailPlan(); //sends email with lesson plan
+                                    } else {
+                                        System.out.println("No email set for " + student.getName() + ". Cannot send lesson plan.");
+                                    }
+                                    student.setAbsentToday(true); //sets to absent
                                 } 
                                 else{
                                     student.setAbsentToday(false); //sets to present
@@ -265,7 +272,17 @@ public class Teacher{
                         String name = scanner.nextLine();
                         System.out.println("Enter the ID of the student:");
                         String id = scanner.nextLine();
+                        System.out.println("Enter the Email of the student (optional):");
+                        String email = scanner.nextLine();
                         addStudent(id, name);
+                        
+                        if (!email.isEmpty()) {
+                            // If email is provided, set it in the Student object
+                            students.get(students.size() - 1).setEmail(email); // Set email for the last added student
+                        } else {
+                            // If no email is provided, just add the student with ID and name
+                            System.out.println("No email provided for " + name + ". Email will not be set.");
+                        }  
                         break;
                     case 3:
                         for(int i = 0; i < students.size(); i++){
