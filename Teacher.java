@@ -170,6 +170,14 @@ public class Teacher{
                             }
                             currTime = LocalTime.now(location);
                         }
+
+                        //add the end of the program this saves the time spent out of class to each student object, so far it has been kept track of in scans, now it is updated to the student objects
+                        //this will automatically increment timesSpentTooLongOutOfClass
+                        //if scans.size() == 0. it will also set absent to true and increment timesAbsent 
+                        //at the end it will save student data
+                        for(int i = 0; i < students.size(); i++){
+
+                        }
                     
                         if (tooEarly == false){
                             System.out.println("Class has ended");
