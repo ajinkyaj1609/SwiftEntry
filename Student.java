@@ -1,14 +1,6 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List; // Import ArrayList
 
 public class Student {
     //static var for all student objects
-    private static ZoneId location = ZoneId.of("America/Los_Angeles"); 
     //un-changing attributes of student 
     private String name;
     private String id;
@@ -21,7 +13,6 @@ public class Student {
     private int timesAbsent;
     private int timesTooLongOutClass;
     private int timeSpentOutOfClass;
-    private LocalDate date = LocalDate.now();
 
     // Constructor to create a Student object from parsed CSV data
     public Student(String id, String name, String email, int timesLate, int timesAbsent, int timesTooLongOutClass, int timeSpentOutOfClass) {
@@ -119,69 +110,6 @@ public class Student {
 
     public void takeScan(){
         studentScans.Scan();
-    }
-
-    /**
-     * Reads student data from a CSV file and returns a List of Student objects.
-     * This method is static as it operates on the file, not a specific Student instance.
-     *
-     * @param filePath The Path to the CSV file (e.g., Paths.get("studentList.csv")).
-     * @return A List of Student objects read from the CSV. Returns an empty list if an error occurs.
-     */
-    public static List<Student> GetData(java.nio.file.Path filePath) {
-        List<Student> students = new ArrayList<>(); // Initialize the list to store students
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {
-            String line;
-            int lineNumber = 0;
-
-            // Loop through each line of the CSV file
-            while ((line = reader.readLine()) != null) {
-                lineNumber++;
-                // Skip the header line (first line)
-                if (lineNumber == 1) {
-                    System.out.println("Header: " + line); // Print header for verification
-                    continue; // Move to the next line
-                }
-
-                // Split the line by comma to get individual data fields
-                String[] data = line.split(",");
-
-                // Ensure the line has the expected number of fields before parsing
-                if (data.length == 7) { // Expected fields: ID,Name,Email,TimesLate,TimesAbsent,TimesTooLongOutClass,TimeSpentOutOfClass
-                    try {
-                        String id = data[0].trim();
-                        String name = data[1].trim();
-                        String email = data[2].trim();
-                        int timesLate = Integer.parseInt(data[3].trim());
-                        int timesAbsent = Integer.parseInt(data[4].trim());
-                        int timesTooLongOutClass = Integer.parseInt(data[5].trim());
-                        int timeSpentOutOfClass = Integer.parseInt(data[6].trim());
-
-                        // Create a Student object from the parsed data
-                        Student student = new Student(id, name, email, timesLate, timesAbsent, timesTooLongOutClass, timeSpentOutOfClass);
-                        
-                        // Add the created Student object to the ArrayList
-                        students.add(student);
-                        // System.out.println("Added student: " + student.getName() + " to list."); // Optional: print as students are added
-
-                    } catch (NumberFormatException e) {
-                        System.err.println("Error parsing number on line " + lineNumber + ": " + line + " - " + e.getMessage());
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.err.println("Not enough data fields on line " + lineNumber + ": " + line + " - " + e.getMessage());
-                    }
-                } else {
-                    System.err.println("Skipping malformed line " + lineNumber + " (incorrect number of fields): " + line);
-                }
-            }
-            System.out.println("\nFinished reading CSV file.");
-            return students; // Return the populated list of students
-
-        } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
-            System.err.println("Please ensure 'studentList.csv' exists in the same directory as the compiled Java code.");
-            return new ArrayList<>(); // Return an empty list on error
-        }
     }
 
     // This method seems to be for initializing an *existing* Student object's fields,

@@ -34,7 +34,7 @@ public class Scans {
             scans.add(x);
             LocalTime prevTime = scans.get(scans.size() - 2).getTime();
             LocalTime nowTime = scans.get(scans.size() - 1).getTime();
-            Duration timeBetween = Duration.between(prevTime, nowTime);
+            Duration timeBetween = Duration.between(nowTime, prevTime);
             int numHours = (int) timeBetween.toHours();
             int numMinutes = (int) timeBetween.toMinutes();
             int minutesOut = (numHours * 60) + numMinutes;
