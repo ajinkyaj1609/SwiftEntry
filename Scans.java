@@ -1,14 +1,17 @@
 import java.util.ArrayList; 
 import java.time.LocalTime;
-import java.time.ZoneId; 
 import java.time.format.DateTimeFormatter;
 import java.time.Duration;
-import java.time.*;
 
 public class Scans {
     //these are an individual student's scans, not scans overall 
     ArrayList<Scan> scans = new ArrayList<>();
     private String id;
+    //timestuff
+    private String sT = "17:25:00"; //class startTime/endTime
+    private DateTimeFormatter theFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private LocalTime startTime = LocalTime.parse(sT, theFormat);
+    //stuff needed to be captured here and moved to teacher to avoid excess code 
     private int timeSpentOutOfClass = 0;
     private boolean late = false;
 
@@ -21,6 +24,9 @@ public class Scans {
             Scan x = new Scan(id);
             x.setCheckType("First check-in"); //first check in, scan size will be 1 
             scans.add(x);
+            if (scans.get(scans.size() - 1).getTime().isAfter(startTime)){
+                late = true;
+            }
         }
         else if (scans.size() % 2 == 0){
             Scan x = new Scan(id);
@@ -50,5 +56,13 @@ public class Scans {
                                 
     public int returnTimeOut(){
         return timeSpentOutOfClass;
+    }
+
+    public boolean returnLate(){
+        return late;
+    }
+
+    public int getScansSize(){ //used to check whether student was absent or not because if they didn't check in at all scans size == 0
+        return scans.size();
     }
 }

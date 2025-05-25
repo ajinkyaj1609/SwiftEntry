@@ -104,11 +104,6 @@ public class Teacher{
         }
     }
 
-    private void removeStudentFromFile(Student student){
-        //this removes students
-        //should also update local arraylist when run
-    }
-
     private void updateAndReset(){
         //start of day method that updates all student objects with saved student data and clears saved student data since it will be replaced by today's data
     }
@@ -118,7 +113,7 @@ public class Teacher{
         Path filePath = Paths.get("studentData.csv");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile(), true))) {
             if (Files.notExists(filePath) || Files.size(filePath) == 0) {
-                writer.write("ID,timesLate, timesAbsent, timesTooLongOutClass");
+                writer.write("ID, timesLate, timesAbsent, timesTooLongOutClass");
                 writer.newLine();
             }
             writer.write(student.getId() + "," + student.getTimesLate() + "," + student.getTimesAbsent() + "," + student.getTimesTooLongOutClass());
@@ -137,7 +132,7 @@ public class Teacher{
             System.out.println("Authentication successful.");
             boolean quit = false; 
             while (quit == false){
-                System.out.println("Press 1 to start the day \nPress 2 to add a student \nPress 3 to remove a student \nPress 4 to create a lesson plan. Type 5 to quit");
+                System.out.println("Press 1 to start the day \nPress 2 to add a student \nPress 3 to remove a student \nPress 4 to create a lesson plan \nPress 5 to quit");
                 int choice = scanner.nextInt();
                 scanner.nextLine();
                 switch (choice) {
@@ -171,14 +166,24 @@ public class Teacher{
                             currTime = LocalTime.now(location);
                         }
 
-                        //add the end of the program this saves the time spent out of class to each student object, so far it has been kept track of in scans, now it is updated to the student objects
-                        //this will automatically increment timesSpentTooLongOutOfClass
-                        //if scans.size() == 0. it will also set absent to true and increment timesAbsent 
-                        //at the end it will save student data
+                        //savinng student data gathered from scans at end of program
                         for(int i = 0; i < students.size(); i++){
-
+                            Student student = students.get(i);
+                            Scans x = student.getStudentScans();
+                            student.incrementTimeSpentOutOfClass(x.returnTimeOut()); //updates time spent of out class and times too long outside of class 
+                            if (x.returnLate()){ 
+                                student.incrementTimesLate(); //updates num time lates
+                            }
+                            if (x.getScansSize() == 0){ 
+                                student.incrementTimesAbsent(); //increments times absent if absent 
+                            } 
+                            else{
+                                student.setAbsentToday(false); //sets to present
+                            }  
                         }
-                    
+
+                        //flagging system here 
+                        
                         if (tooEarly == false){
                             System.out.println("Class has ended");
                         }
