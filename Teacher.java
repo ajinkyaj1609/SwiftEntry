@@ -110,6 +110,42 @@ public class Teacher{
         }
     }
 
+    private void updateStudentToFile(Student student) {
+        //this saves the list of students
+        String id= student.getId();
+        String name= student.getName();
+        //should also update local arraylist when run
+        Path filePath = Paths.get("studentData.csv");
+
+        // Default values for the remaining fields
+        String email = student.getEmail(); // Empty string for email
+        int timesLate = student.getTimesLate();
+        int timesAbsent = student.getTimesAbsent();
+        int timesTooLongOutClass = student.getTimesTooLongOutClass();
+        int timeSpentOutOfClass = student.getTimeSpentOutOfClass();
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile(), true))) {
+            // If the file does not exist or is empty, write the header row
+            if (Files.notExists(filePath) || Files.size(filePath) == 0) {
+                writer.write("ID,Name,Email,TimesLate,TimesAbsent,TimesTooLongOutClass,TimeSpentOutOfClass");
+                writer.newLine();
+            }
+
+            // Write the new student's data, including ID, Name, and the default values for other fields
+            writer.write(id + "," +
+                         name + "," +
+                         email + "," +
+                         timesLate + "," +
+                         timesAbsent + "," +
+                         timesTooLongOutClass + "," +
+                         timeSpentOutOfClass);
+            writer.newLine(); // Move to the next line for the next entry
+            System.out.println("Student '" + name + "' (ID: " + id + ") updated to file successfully!");
+        } catch (IOException e) {
+            System.err.println("Error appending student '" + name + "' to file: " + e.getMessage());
+        }
+    }
+
     private void reset(){
         String filePath = "studentData.csv";
         try{
@@ -139,7 +175,7 @@ public class Teacher{
                     case 1:
                         System.out.println("Starting the day...");
 
-                        String sT = "19:38:00"; //class startTime/endTime
+                        String sT = "11:05:00"; //class startTime/endTime
                         String eT = "20:18:09";
 
                         DateTimeFormatter theFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -189,19 +225,19 @@ public class Teacher{
                                 else{
                                     student.setAbsentToday(false); //sets to present
                                 }  
-                                appendStudentToFile(student);
+                                updateStudentToFile(student);
                             }
                             //flagging system here 
                             System.out.println("These are the students you should be checking in on: ");
                             for(int i = 0; i < students.size();i++){
                                 Student student = students.get(i);
-                                if (student.getTimesTooLongOutClass() > 2){
+                                if (student.getTimesTooLongOutClass() > 3){
                                     System.out.println(student.getName() + " has been spending too much time outside of class");
                                 }
-                                if (student.getTimesAbsent() > 2){
+                                if (student.getTimesAbsent() > 3){
                                     System.out.println(student.getName() + " has been absent too many days");
                                 }
-                                if (student.getTimesLate() > 2){
+                                if (student.getTimesLate() > 3){
                                     System.out.println(student.getName() + " has been late too many times");
                                 }
                             }
