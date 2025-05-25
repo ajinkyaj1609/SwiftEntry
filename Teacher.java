@@ -45,7 +45,7 @@ public class Teacher{
         return lessonPlan;
     }
 
-    public void addStudent(String id, String name) {
+    public void addStudent(String id, String name){
         Student x = new Student(id, name, "", 0, 0, 0, 0);
         students.add(x);
         appendStudentToFile(x);
@@ -57,7 +57,7 @@ public class Teacher{
 
     public int findStudentIndex(String id) {
         for (int i = 0; i < students.size(); i++) {
-            if (students.get(i).getId() == id) {
+            if (students.get(i).getId().equals(id)) {
                 return i;
             }
         }
