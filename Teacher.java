@@ -156,7 +156,7 @@ public class Teacher{
             FileWriter writer = new FileWriter(filePath, false);
             writer.write("");
             writer.close();
-            System.out.println("Existing csv data cleared");
+            // System.out.println("Existing csv data cleared");
         }
         catch(IOException e){
             System.err.println("Csv data clearance failed");
@@ -345,7 +345,7 @@ public class Teacher{
                     System.err.println("Skipping malformed line " + lineNumber + " (incorrect number of fields): " + line);
                 }
             }
-            System.out.println("\nFinished reading CSV file.");
+            // System.out.println("\nFinished reading CSV file.");
             return students; // Return the populated list of students
 
         } catch (IOException e) {
