@@ -16,7 +16,7 @@ import java.util.List; // Import ArrayList
 public class Teacher{
 
     private static String password;
-    private static String lessonPlan;
+    private static String lessonPlan = "";
     private List<Student> students = new ArrayList<>();
 
     public Teacher() {
@@ -58,7 +58,11 @@ public class Teacher{
     }
 
     public void removeStudent(int index) {
-        students.remove(index);
+        students.remove(index); //removes student from local arraylist
+        reset(); //clears file to get rid of all students including student to be removed
+        for (int i = 0; i < students.size(); i++){
+            updateStudentToFile(students.get(i)); //repopulates file with all the students aside from the removed one
+        }
     }
 
     public int findStudentIndex(String id) {
@@ -167,7 +171,8 @@ public class Teacher{
         if (password.equals(scanner.nextLine())) {
             System.out.println("Authentication successful.");
             boolean quit = false; 
-            while (quit == false){
+            boolean startProgramRun = false;
+            while (quit == false && startProgramRun == false){
                 System.out.println("Press 1 to start the day \nPress 2 to add a student \nPress 3 to remove a student \nPress 4 to create a lesson plan \nPress 5 to quit");
                 int choice = scanner.nextInt();
                 scanner.nextLine();
@@ -175,7 +180,7 @@ public class Teacher{
                     case 1:
                         System.out.println("Starting the day...");
 
-                        String sT = "11:05:00"; //class startTime/endTime
+                        String sT = "11:05:00"; //class startTime & endTime, change to whatever you want, just make sure to change start time in scans as well for acccuracy 
                         String eT = "20:18:09";
 
                         DateTimeFormatter theFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -185,11 +190,13 @@ public class Teacher{
                         boolean tooEarly = false;
                         boolean endEarly = false;
 
+                        //if teacher starts class before class starts
                         if (!currTime.isAfter(startTime) || !currTime.isBefore(endTime)){
                             System.out.println("Class has not started yet, come back when class starts.");
                             tooEarly = true;
                         }
 
+                        //scanning system loop
                         while(currTime.isAfter(startTime) && currTime.isBefore(endTime) && endEarly == false){
                             System.out.println("Type in student's id for scanning. Type ! to quit.");
                             String id = scanner.nextLine();
@@ -208,7 +215,7 @@ public class Teacher{
                             }
                         }
 
-                        if (tooEarly == false){
+                        if (tooEarly == false){ //if program has actually run
                             System.out.println("Class has ended");
                             System.out.println("");
                             reset();
@@ -227,22 +234,31 @@ public class Teacher{
                                 }  
                                 updateStudentToFile(student);
                             }
-                            //flagging system here 
+                            //attendance notifications
+                            System.out.println("Here are the students you should mark absent:");
+                            for(int i = 0; i < students.size(); i++){
+                                Student student = students.get(i);
+                                if (student.isAbsentToday()){
+                                    System.out.println(student.getName() + ", id: " + student.getId() + ", was absent today");
+                                }
+                            }
+                            //flagging notifications 
                             System.out.println("These are the students you should be checking in on: ");
                             for(int i = 0; i < students.size();i++){
                                 Student student = students.get(i);
-                                if (student.getTimesTooLongOutClass() > 3){
-                                    System.out.println(student.getName() + " has been spending too much time outside of class");
+                                if (student.getTimesTooLongOutClass() > 3){ //change parameters based on what you want
+                                    System.out.println(student.getName() + ", id: " + student.getId() + ", has been spending too much time outside of class");
                                 }
                                 if (student.getTimesAbsent() > 3){
-                                    System.out.println(student.getName() + " has been absent too many days");
+                                    System.out.println(student.getName() + ", id: " + student.getId() + ", has been absent too many days");
                                 }
                                 if (student.getTimesLate() > 3){
-                                    System.out.println(student.getName() + " has been late too many times");
+                                    System.out.println(student.getName() + ", id: " + student.getId() + ", has been late too many times");
                                 }
                             }
                         }
 
+                        startProgramRun = true;
                         break;
                     case 2:
                         System.out.println("Enter the Name of the student:");
@@ -258,7 +274,6 @@ public class Teacher{
                         System.out.println("Enter ID of student to remove:");
                         String ID = scanner.nextLine();
                         int index = findStudentIndex(ID);
-                        
                         removeStudent(index);
                         break;
                     case 4:
