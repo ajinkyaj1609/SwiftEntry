@@ -3,6 +3,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TestEmail",
+            "request": "launch",
+            "mainClass": "TestEmail",
+            "projectName": "SwiftEntry_89d89da1"
+        },
+        {
+            "type": "java",
             "name": "ScannerTesting",
             "request": "launch",
             "mainClass": "ScannerTesting",
