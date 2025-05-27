@@ -254,7 +254,7 @@ public class Teacher{
                                         try {
                                             student.emailPlan(startTime.toString(), endTime.toString(), subject);
                                             } catch (Exception e) {
-                                            System.out.println("Failed to email " + s.getEmail() + ": " + e.getMessage());
+                                            System.out.println("Failed to email " + student.getEmail() + ": " + e.getMessage());
     }
                                             //sends email with lesson plan
                                     } else {
