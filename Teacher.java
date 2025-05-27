@@ -179,6 +179,9 @@ public class Teacher{
     }
 
     public void startDay() {
+        for(int i = 0; i < students.size(); i++){
+            students.get(i).resetTimeSpentOutOfClass();
+        }
         Scanner scanner = new Scanner(System.in);
         ZoneId location = ZoneId.of("America/Los_Angeles");
         System.out.println("Please enter your password:");
