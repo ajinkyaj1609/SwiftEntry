@@ -1,17 +1,18 @@
-import java.io.BufferedWriter;
 import java.io.BufferedReader;
-import java.io.FileWriter;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.PublicKey;
 import java.time.LocalTime;
 import java.time.ZoneId; //stuff for starting day- scanner testing is moved into teacher
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.List; // Import ArrayList
+import java.util.List;
+import java.util.Scanner; // Import ArrayList
 
 public class Teacher{
 
@@ -24,6 +25,8 @@ public class Teacher{
         Path path = Paths.get("studentData.csv");
         students = GetData(path);
     }
+
+    
 
     public Teacher(String p) {
         password = p;
@@ -45,6 +48,14 @@ public class Teacher{
         String plan = scanner.nextLine();
         lessonPlan += plan;
         System.out.println("Lesson plan saved successfully.\n");
+    }
+
+    public void setStartendTime() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the start time of the class (HH:mm:ss):");
+        String sT = scanner.nextLine();            
+        System.out.println("Enter the end time of the class (HH:mm:ss):");
+        String eT = scanner.nextLine();
     }
 
     public static String getLessonPlan() {
@@ -170,6 +181,7 @@ public class Teacher{
         System.out.println("Please enter your password:");
         if (password.equals(scanner.nextLine())) {
             System.out.println("Authentication successful.");
+           
             boolean quit = false; 
             boolean startProgramRun = false;
             while (quit == false && startProgramRun == false){
@@ -179,12 +191,14 @@ public class Teacher{
                 switch (choice) {
                     case 1:
                         System.out.println("Starting the day...");
-
-                        String sT = "11:05:00"; //class startTime & endTime, change to whatever you want, just make sure to change start time in scans as well for acccuracy 
-                        String eT = "20:18:09";
+                        //ask theacehr for start time and end time of class
+                        // String sT = "11:05:00"; //class startTime & endTime, change to whatever you want, just make sure to change start time in scans as well for acccuracy 
+                        // String eT = "20:18:09";
+                        
+                        //parse the start time and end time
 
                         DateTimeFormatter theFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
-                        LocalTime startTime = LocalTime.parse(sT, theFormat);
+                        LocalTime startTime = LocalTime.parse(st,theFormat); // Assuming getStartTime() returns a String in "HH:mm:ss" format
                         LocalTime endTime = LocalTime.parse(eT, theFormat);
                         LocalTime currTime = LocalTime.now(location);
                         boolean tooEarly = false;
@@ -201,7 +215,14 @@ public class Teacher{
                             System.out.println("Type in student's id for scanning. Type ! to quit.");
                             String id = scanner.nextLine();
                             if(id.equals("!")){
-                                endEarly = true;
+                                System.out.println("Enter password to confirm early end:");
+                                String inputPass = scanner.nextLine();
+                                    if (checkPassword(inputPass)) {
+                                        System.out.println("Correct password. Ending class early...");
+                                        endEarly = true;
+                                    } else {
+                                        System.out.println("Incorrect password. Continuing scan...");
+                            }
                             }
                             else{
                                 int index = findStudentIndex(id); 
@@ -230,7 +251,12 @@ public class Teacher{
                                     student.incrementTimesAbsent(); //increments times absent if absent 
                                     if (student.getEmail() != null && !student.getEmail().isEmpty()) {
                                         // Send email if email is set
-                                        student.emailPlan(); //sends email with lesson plan
+                                        try {
+                                            student.emailPlan(startTime.toString(), endTime.toString(), subject);
+                                            } catch (Exception e) {
+                                            System.out.println("Failed to email " + student.getEmail() + ": " + e.getMessage());
+    }
+                                            //sends email with lesson plan
                                     } else {
                                         System.out.println("No email set for " + student.getName() + ". Cannot send lesson plan.");
                                     }
@@ -351,6 +377,7 @@ public class Teacher{
                         
                         // Add the created Student object to the ArrayList
                         students.add(student);
+                        
                         // System.out.println("Added student: " + student.getName() + " to list."); // Optional: print as students are added
 
                     } catch (NumberFormatException e) {

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+//works now nvm
 //with fork test
 public class Main {
     //arraylist of all students acceible everyehere
@@ -15,6 +16,7 @@ public class Main {
         //     System.out.println(s);
         // }
         Teacher prof = new Teacher();
+        prof.setStartendTime();
         
         prof.startDay();
        

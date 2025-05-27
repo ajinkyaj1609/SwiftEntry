@@ -1,7 +1,7 @@
-import java.util.ArrayList; 
+import java.time.Duration; 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.Duration;
+import java.util.ArrayList;
 
 public class Scans {
     //these are an individual student's scans, not scans overall 
@@ -17,6 +17,14 @@ public class Scans {
 
     public Scans(String id){
         this.id = id;
+    }
+
+    public String getStartTime(){
+
+        return sT;
+    }
+    public String getEndTIme(){
+        return sT; //assuming end time is same as start time for simplicity, can be changed later
     }
 
     public void Scan(){
