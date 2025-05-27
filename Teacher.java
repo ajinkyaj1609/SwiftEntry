@@ -19,6 +19,9 @@ public class Teacher{
     private static String password;
     private static String lessonPlan = "";
     private List<Student> students = new ArrayList<>();
+    private String sT = "11:05:00"; //class startTime, change to whatever you want, just make sure to change start time in scans as well for accuracy
+    private String eT = "20:18:09"; //class endTime, change to whatever you want, just make sure to change end time in scans as well for accuracy
+
 
     public Teacher() {
         password = "000000";
@@ -53,9 +56,9 @@ public class Teacher{
     public void setStartendTime() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the start time of the class (HH:mm:ss):");
-        String sT = scanner.nextLine();            
+        sT = scanner.nextLine();            
         System.out.println("Enter the end time of the class (HH:mm:ss):");
-        String eT = scanner.nextLine();
+        eT = scanner.nextLine();
     }
 
     public static String getLessonPlan() {
@@ -198,7 +201,7 @@ public class Teacher{
                         //parse the start time and end time
 
                         DateTimeFormatter theFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
-                        LocalTime startTime = LocalTime.parse(st,theFormat); // Assuming getStartTime() returns a String in "HH:mm:ss" format
+                        LocalTime startTime = LocalTime.parse(sT,theFormat); // Assuming getStartTime() returns a String in "HH:mm:ss" format
                         LocalTime endTime = LocalTime.parse(eT, theFormat);
                         LocalTime currTime = LocalTime.now(location);
                         boolean tooEarly = false;
@@ -252,7 +255,7 @@ public class Teacher{
                                     if (student.getEmail() != null && !student.getEmail().isEmpty()) {
                                         // Send email if email is set
                                         try {
-                                            student.emailPlan(startTime.toString(), endTime.toString(), subject);
+                                            student.emailPlan();
                                             } catch (Exception e) {
                                             System.out.println("Failed to email " + student.getEmail() + ": " + e.getMessage());
     }
