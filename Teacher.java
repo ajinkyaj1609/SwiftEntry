@@ -86,7 +86,7 @@ public class Teacher{
         Path filePath = Paths.get("studentData.csv");
 
         // Default values for the remaining fields
-        String email = ""; // Empty string for email
+        String email = student.getEmail();; // Empty string for email
         int timesLate = 0;
         int timesAbsent = 0;
         int timesTooLongOutClass = 0;
