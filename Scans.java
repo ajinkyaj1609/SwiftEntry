@@ -1,6 +1,5 @@
 import java.time.Duration; 
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Scans {
@@ -8,23 +7,18 @@ public class Scans {
     ArrayList<Scan> scans = new ArrayList<>();
     private String id;
     //timestuff
-    private String sT = "17:25:00"; //class startTime/endTime
-    private DateTimeFormatter theFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
-    private LocalTime startTime = LocalTime.parse(sT, theFormat);
+    private LocalTime startTime;
     //stuff needed to be captured here and moved to teacher to avoid excess code 
     private int timeSpentOutOfClass = 0;
     private boolean late = false;
 
     public Scans(String id){
         this.id = id;
+        this.startTime = LocalTime.of(11, 5);
     }
 
-    public String getStartTime(){
-
-        return sT;
-    }
-    public String getEndTIme(){
-        return sT; //assuming end time is same as start time for simplicity, can be changed later
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
     }
 
     public void Scan(){
