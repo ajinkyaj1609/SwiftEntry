@@ -82,7 +82,7 @@ public class Student {
     }
 
     // Assuming Teacher and TLSEmail classes exist
-    public void emailPlan() {
+    public void emailPlan() throws jakarta.mail.MessagingException {
         String msg = Teacher.getLessonPlan(); // Assuming Teacher.getLessonPlan() is static
         if (msg == null || msg.isEmpty()) { // Check for null or empty message
             msg = "No lesson plan available. You should check in with your teacher.";
